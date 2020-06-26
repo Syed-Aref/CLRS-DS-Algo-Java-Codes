@@ -1,0 +1,160 @@
+#Divide array
+import java.util.*;
+public class DivideArray {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter array length");
+		int q = sc.nextInt();
+		int[] a = new int[q];
+		System.out.println("Enter " + q + " numbers");
+		for(int i = 0;i<=a.length-1;i++) 
+		{
+			a[i] = sc.nextInt();
+		}
+		int[] L = new int[ (int)Math.round( (a.length)/2.0 ) ];
+		int[] R = new int[a.length/2];
+		for(int i = 0;i<=L.length - 1;i++) 
+		{
+			L[i] = a[i];
+		}
+		for(int i = 0;i<=R.length-1;i++) 
+		{
+			R[i] = a[i + (int)Math.round( (a.length)/2.0 )];
+		}
+		System.out.println( Arrays.toString(a) );
+		System.out.println( Arrays.toString(L) );
+		System.out.println( Arrays.toString(R) );
+	}
+}
+#Merge-array
+import java.util.*;
+public class MergeArray {
+	int[] mergeArray(int[] b1,int[] b2)
+	{
+		int[] b = new int[b1.length + b2.length];
+		int i = 0;
+		int j = 0;
+		int k = 0;
+		while( (i<=(b1.length-1))&&(j<=(b2.length-1))&&(k<=(b.length-1)) )
+		{
+			if(b1[i]<=b2[j]) {
+				b[k] = b1[i];
+				i++;
+			}
+			else
+			{
+				b[k]=b2[j];
+				j++;
+			}
+			k++;
+		}
+		while( (i<=(b1.length-1))&&(k<=(b.length-1)) ) 
+		{
+			b[k] = b1[i];
+			i++;
+			k++;
+		}
+		while( (j<=(b2.length-1))&&(k<=(b.length-1)) ) 
+		{
+			b[k] = b2[j];
+			j++;
+			k++;
+		}
+		return b;		
+	}
+	public static void main(String[] args) {
+		MergeArray m = new MergeArray();
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter array length");
+		int q1 = sc.nextInt();
+		int[] a1 = new int[q1];
+		System.out.println("Enter " + q1 + " numbers");
+		for(int i = 0;i<=a1.length-1;i++) 
+		{
+			a1[i] = sc.nextInt();
+		}
+		System.out.println("Enter array length");
+		int q2 = sc.nextInt();
+		int[] a2 = new int[q2];
+		System.out.println("Enter " + q2 + " numbers");
+		for(int i = 0;i<=a2.length-1;i++) 
+		{
+			a2[i] = sc.nextInt();
+		}
+		int[] a = m.mergeArray(a1,a2);
+		System.out.println(Arrays.toString(a1));
+		System.out.println(Arrays.toString(a2));
+		System.out.println(Arrays.toString(a));
+	}
+}
+
+
+#Merge and sort
+import java.util.*;
+public class MergeSortArray02 {
+	static void mergeSort(int[] a,int p,int q) 
+	{
+		if(q>p)
+		{
+			int mid = (p + q)/2;
+			mergeSort(a,p,mid);
+			mergeSort(a,mid+1,q);
+			sort(a,p,mid,q);
+		}
+		else
+			return ;
+	}
+	static void sort(int[] a,int p,int mid,int q) 
+	{
+		int[] L = new int[mid-p+1];
+		int[] R = new int[q-mid];
+		for(int i = 0;i<=L.length-1;i++) 
+			L[i] = a[p+i];
+		for(int i = 0;i<=R.length-1;i++) 
+			R[i] = a[mid+1+i];
+		int il = 0;
+		int ir = 0;
+		int i = p;
+		while( (il<=L.length-1)&&(ir<=R.length-1) ) 
+		{
+			if(L[il]<=R[ir]) 
+			{
+				a[i] = L[il];
+				i++;
+				il++;
+			}
+			else 
+			{
+				a[i] = R[ir];
+				i++;
+				ir++;
+			}
+		}
+		while(il<=L.length-1) 
+		{
+			a[i] = L[il];
+			i++;
+			il++;
+		}
+		while(ir<=R.length-1) 
+		{
+			a[i] = R[ir];
+			i++;
+			ir++;
+			
+		}
+	}
+	public static void main(String[] args) 
+	{
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter array length");
+		int q = sc.nextInt();
+		System.out.println("Enter " + q + " numbers");
+		int[] a = new int[q];
+		for(int i = 0;i<=a.length-1;i++)
+			a[i] = sc.nextInt();
+		System.out.println(Arrays.toString(a));
+		mergeSort(a,0,a.length-1);
+		System.out.println(Arrays.toString(a));
+	}
+}
